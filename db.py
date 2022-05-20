@@ -53,8 +53,8 @@ def get_all_records(conn):
     print(data)
 
 
-def get_records_that_match(conn, searchTerm):
-    query = f' SELECT * FROM People WHERE FirstName = "{searchTerm}"'
+def get_records_that_match(conn, searchColumn, searchTerm):
+    query = f' SELECT * FROM People WHERE {searchColumn} = "{searchTerm}"'
     cur = conn.cursor()
     cur.execute(query)
     data = cur.fetchall()
@@ -82,7 +82,7 @@ def main():
         # print(f'Record no: {record_id} created')
 
         get_all_records(conn)
-        get_records_that_match(conn, 'Craig')
+        get_records_that_match(conn, 'FirstName', 'Craig')
 
 
 if __name__ == '__main__':
