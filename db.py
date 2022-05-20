@@ -81,8 +81,8 @@ def main():
         # record_id = create_record(conn, 'People', ('Nicky', 'Chambers'))
         # print(f'Record no: {record_id} created')
 
-        print(get_all_records(conn))
-        print(get_records_that_match(conn, 'People', 'FirstName', 'Craig'))
+        # print(get_all_records(conn))
+        # print(get_records_that_match(conn, 'People', 'FirstName', 'Craig'))
 
 
 if __name__ == '__main__':
