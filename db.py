@@ -30,9 +30,9 @@ def check_table_exists(conn, table):
 def create_table(conn, table, query):
     conn.execute(query)
     if check_table_exists(conn, table):
-        print(f'Table {table} created')
+        print(f'{table} Table created')
     else:
-        print(f'ERROR: Table {table} was not created')
+        print(f'ERROR: {table} Table was not created')
 
 
 def main():
