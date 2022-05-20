@@ -36,9 +36,7 @@ def create_table(conn, table, query):
 
 
 def create_record(conn, table, data):
-    query = """ INSERT INTO "main"."People"
-                ("FirstName", "Surname")
-                    VALUES (?,?);"""
+    query = f'INSERT INTO "{table}" ("FirstName", "Surname") VALUES (?,?);'
     cur = conn.cursor()
     cur.execute(query, data)
     conn.commit()
@@ -78,11 +76,11 @@ def main():
         else:
             print('People Table exists')
 
-        # record_id = create_record(conn, 'People', ('Nicky', 'Chambers'))
+        # record_id = create_record(conn, 'People', ('Ellen', 'Chambers'))
         # print(f'Record no: {record_id} created')
 
         # print(get_all_records(conn))
-        # print(get_records_that_match(conn, 'People', 'FirstName', 'Craig'))
+        # print(get_records_that_match(conn, 'People', 'FirstName', 'Ellen'))
 
 
 if __name__ == '__main__':
