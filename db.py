@@ -35,6 +35,32 @@ def create_table(conn, table, query):
         print(f'ERROR: {table} Table was not created')
 
 
+def create_record(conn, table, data):
+    query = """ INSERT INTO "main"."People"
+                ("FirstName", "Surname")
+                    VALUES (?,?);"""
+    cur = conn.cursor()
+    cur.execute(query, data)
+    conn.commit()
+    return cur.lastrowid
+
+
+def get_all_records(conn):
+    query = """ SELECT * FROM People """
+    cur = conn.cursor()
+    cur.execute(query)
+    data = cur.fetchall()
+    print(data)
+
+
+def get_records_that_match(conn, searchTerm):
+    query = f' SELECT * FROM People WHERE FirstName = "{searchTerm}"'
+    cur = conn.cursor()
+    cur.execute(query)
+    data = cur.fetchall()
+    print(data)
+
+
 def main():
     database = 'test.db'
 
@@ -51,6 +77,12 @@ def main():
             create_table(conn, 'People', query)
         else:
             print('People Table exists')
+
+        # record_id = create_record(conn, 'People', ('Nicky', 'Chambers'))
+        # print(f'Record no: {record_id} created')
+
+        get_all_records(conn)
+        get_records_that_match(conn, 'Craig')
 
 
 if __name__ == '__main__':
