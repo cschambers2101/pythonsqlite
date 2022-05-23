@@ -86,8 +86,9 @@ def main():
         else:
             print('People table exists')
 
-    record_id = create_record(conn, 'People', ('Nicky', 'Chambers'))
-    print(f'Record no: {record_id} created')
+    # Uncomment to create a new record
+    # record_id = create_record(conn, 'People', ('Nicky', 'Chambers'))
+    # print(f'Record no: {record_id} created')
 
     print(get_all_records(conn, 'Test'))
 
