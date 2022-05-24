@@ -1,4 +1,4 @@
-from db import DB
+from dbclass import DB
 
 
 def get_connection():
