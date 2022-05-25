@@ -7,8 +7,15 @@ conn = database.Conn
 people = PeopleTable(conn)
 # people.create_table()
 
-p = Person('Craig', 'Chambers', 54)
-people.add_person_record(p)
+# p = Person('Nicky', 'Chambers', 54)
+# people.add_person_record(p)
+# p = Person('Delete', 'This', 54)
+# people.add_person_record(p)
+
+# people.delete_Person(7)
+
+print(people.get_Person_by_id(5))
+print(people.get_Person_by_surname('Chambers'))
 
 print(people.get_People())
 

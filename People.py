@@ -29,11 +29,34 @@ class PeopleTable:
         data = self.cursor.fetchall()
         return data
 
+
+    def get_Person_by_id(self, id):
+        """Gets a person by their id
+        :param id: ID of the person to get
+        :return : The person
+        """
+        query = f'SELECT * FROM People WHERE id={id};'
+        self.cursor.execute(query)
+        data = self.cursor.fetchone()
+        return data
+
+    
+    def get_Person_by_surname(self, surname):
+        """Gets a person by searching for everyone with the surname
+        :param surname: Surname to search for
+        :return : List of people matching surname
+        """
+        query = f'SELECT * FROM People WHERE surname="{surname}";'
+        self.cursor.execute(query)
+        data = self.cursor.fetchall()
+        return data
+
+
     def delete_Person(self, id):
         """Deletes a person with matching ID
         :param id: ID of the person you wish to delete
         """
-        query = f''
+        query = f'DELETE FROM People WHERE id={id};'
         self.cursor.execute(query)
         self.conn.commit()
         
