@@ -14,8 +14,8 @@ class PeopleTable:
 
     def add_person_record(self, person):
         """Adds a person record to the People table"""
-        query = 'INSERT INTO "Person" ("FirstName", "Surname", "Age") VALUES (?,?,?);'
-        self.cursor.execute(query, person)
+        query = 'INSERT INTO "People" ("FirstName", "Surname", "Age") VALUES (?,?,?);'
+        self.cursor.execute(query, (person.firstName, person.surname, person.age))
         self.conn.commit()
         return self.cursor.lastrowid
 
@@ -28,3 +28,12 @@ class PeopleTable:
         self.cursor.execute(query)
         data = self.cursor.fetchall()
         return data
+
+    def delete_Person(self, id):
+        """Deletes a person with matching ID
+        :param id: ID of the person you wish to delete
+        """
+        query = f''
+        self.cursor.execute(query)
+        self.conn.commit()
+        
