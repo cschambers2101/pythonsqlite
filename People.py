@@ -32,6 +32,10 @@ class PeopleTable:
             return []
 
     def get_Data(self, query):
+        """ Runs query and returns data as a list of dictionaries
+        :param query: SQL query to run on the database
+        :return : result from query as list of dictionaries
+        """
         try:
             self.conn.row_factory = sqlite3.Row
             cur = self.conn.cursor()
