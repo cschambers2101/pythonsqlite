@@ -81,6 +81,6 @@ class PeopleTable:
         :param id: id of person to update
         :param person: Person instance to update information with
         """
-        query = f"UPDATE People SET firstName = '{person.firstName}', surname= '{person.surname}' WHERE id = {id};"
+        query = f"UPDATE People SET firstName = '{person.firstName}', surname= '{person.surname}', age='{person.age}' WHERE id = {id};"
         self.cursor.execute(query)
         self.conn.commit()
