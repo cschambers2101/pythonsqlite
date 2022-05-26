@@ -7,8 +7,8 @@ conn = database.Conn
 people = PeopleTable(conn)
 # people.create_table()
 
-# p = Person('Nicky', 'Chambers', 54)
-# people.add_person_record(p)
+# p = Person('Ellen', 'Chambers', 18)
+# people.update_Person_by_id(1, p)
 # p = Person('Delete', 'This', 54)
 # people.add_person_record(p)
 

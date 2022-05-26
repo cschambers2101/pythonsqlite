@@ -75,3 +75,12 @@ class PeopleTable:
         query = f'DELETE FROM People WHERE id={id};'
         self.cursor.execute(query)
         self.conn.commit()
+
+    def update_Person_by_id(self, id, person):
+        """Updates details pf person with the id given
+        :param id: id of person to update
+        :param person: Person instance to update information with
+        """
+        query = f"UPDATE People SET firstName = '{person.firstName}', surname= '{person.surname}' WHERE id = {id};"
+        self.cursor.execute(query)
+        self.conn.commit()
