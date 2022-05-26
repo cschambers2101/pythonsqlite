@@ -22,56 +22,47 @@ class PeopleTable:
         self.conn.commit()
         return self.cursor.lastrowid
 
-    def get_People(self):
-        """Gets all the People from the Database
-        :return : All people in database
-        """
-        query = 'SELECT * FROM People'
-        self.cursor.execute(query)
-        data = self.cursor.fetchall()
-        return data
+    def sql_data_to_list_of_dicts(self, data):
+        """Returns data from an SQL query as a list of dicts."""
+        try:
+            unpacked = [{k: item[k] for k in item.keys()} for item in data]
+            return unpacked
+        except Exception as e:
+            print(f"Failed to uppack data with error:\n{e}")
+            return []
 
-    def get_users(self):
-        users = []
+    def get_Data(self, query):
         try:
             self.conn.row_factory = sqlite3.Row
             cur = self.conn.cursor()
-            cur.execute("SELECT * FROM People")
+            cur.execute(query)
             rows = cur.fetchall()
 
             # convert row objects to dictionary
-            for i in rows:
-                user = {}
-                user["id"] = i["id"]
-                user["firstname"] = i["firstName"]
-                user["surname"] = i["surname"]
-                users.append(user)
-
+            data = self.sql_data_to_list_of_dicts(rows)
+            return data
         except Exception as ex:
             print(type(ex).__name__, ex.args)
-            users = []
 
-        return users
+    def get_People(self):
+        """ Lists all the people from the database
+        :return : Dictionary of all people in the database
+        """
+        return self.get_Data('SELECT * FROM People')
 
     def get_Person_by_id(self, id):
         """Gets a person by their id
         :param id: ID of the person to get
         :return : The person
         """
-        query = f'SELECT * FROM People WHERE id={id};'
-        self.cursor.execute(query)
-        data = self.cursor.fetchone()
-        return data
+        return self.get_Data(f'SELECT * FROM People WHERE id={id};')
 
     def get_Person_by_surname(self, surname):
         """Gets a person by searching for everyone with the surname
         :param surname: Surname to search for
         :return : List of people matching surname
         """
-        query = f'SELECT * FROM People WHERE surname="{surname}";'
-        self.cursor.execute(query)
-        data = self.cursor.fetchall()
-        return data
+        return self.get_Data(f'SELECT * FROM People WHERE surname="{surname}";')
 
     def delete_Person(self, id):
         """Deletes a person with matching ID

@@ -14,12 +14,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    # data = people.get_People()
-    data = people.get_users()
-
-    jsonString = jsonify(list(data))
-
-    return jsonString
+    return jsonify(people.get_People())
 
 
 if __name__ == '__main__':
