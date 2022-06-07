@@ -1,5 +1,5 @@
 from logging import exception
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, abort
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 import os
@@ -91,16 +91,14 @@ def update_person(id):
 # Deletes the person with the id
 @app.route('/people/<id>', methods=['DELETE'])
 def delete_person(id):
-    try:
-        person = People.query.get(id)
-        if person == None:
-            raise exception
-            
-        db.session.delete(person)
-        db.session.commit()
-        return person_schema.jsonify(person)
-    except:
-        return '{"error": "No record to delete"}' 
+    person = People.query.get(id)
+    if person == None:
+        abort(404)
+        
+    db.session.delete(person)
+    db.session.commit()
+    return person_schema.jsonify(person)
+        
 
 
 # Main program loop
